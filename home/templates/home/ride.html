@@ -3,7 +3,7 @@
 <br />
 <br />
 <h1 class="projTitle" style="text-align: center; margin-top: 1.5em">
-	Explore Car
+	{{title}}
 </h1>
 <div class="services-container" style="margin: 35px">
 	{% for cars in car %}
@@ -13,7 +13,13 @@
 			<img src="{{ cars.images.url }}" alt="" />
 			{% endif %}
 		</div>
-		<p><a href="{% url 'detail' cars.uid %}">View</a></p>
+		<div class="box-options">
+			<p>
+				<a href="{% url 'detail' cars.uid %}">View</a>
+			</p>
+			<p class="opt2">{% if cars.car_type == 'U' %}Used {% endif %}</p>
+		</div>
+
 		<h3>{{cars.car_name}}</h3>
 		<h2>{{cars.price}} <span>₹</span></h2>
 		{% if user.is_authenticated %}

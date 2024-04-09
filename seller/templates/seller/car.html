@@ -155,7 +155,10 @@
         </div> -->
 		</div>
 		<div class="contactForm">
-			<h1>Car Selling Form</h1>
+			<h1>Used Car Selling Form</h1>
+			<p>Create a ad for selling car</p>
+			<br />
+
 			<form action="{% url 'car' %}" enctype="multipart/form-data" method="POST">
 				{% csrf_token %} {{form.media}} {{form.as_p}}
 				<!-- {{ form.media }}

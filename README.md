@@ -73,6 +73,7 @@ The goal of the project to create a car and buying selling website with ml price
 
 - **Note-1** : While Development if Migration Req:
 ```
+    python3 manage.py makemigrations
     python3 manage.py migrate
 
 ```

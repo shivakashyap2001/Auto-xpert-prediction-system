@@ -134,11 +134,10 @@ def detail_page(request, detail_page_uid):
     return render(request, 'home/detail.html', context)
 
 
-def ride(request):
-    car = Car.objects.all()
+def used_ride(request):
+    car = Car.objects.filter(car_type='U')
     paginator = Paginator(car, 9)
     
-
     page_number = request.GET.get('page')
     try:
         car = paginator.get_page(page_number)
@@ -150,6 +149,28 @@ def ride(request):
         car = paginator.page(paginator.num_pages)
         
     context = {
+        'title': 'Explore Used Cars',
+        'car':car 
+    }
+    return render(request, 'home/ride.html', context)
+
+
+def ride(request):
+    car = Car.objects.filter(car_type='N')
+    paginator = Paginator(car, 9)
+    
+    page_number = request.GET.get('page')
+    try:
+        car = paginator.get_page(page_number)
+    except PageNotAnInteger:
+       # If page is not an integer, deliver the first page.
+        car = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver the last page of results.
+        car = paginator.page(paginator.num_pages)
+        
+    context = {
+        'title': 'Explore New Cars',
         'car':car 
     }
     return render(request, 'home/ride.html', context)

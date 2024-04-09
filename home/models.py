@@ -20,17 +20,22 @@ class CarCategory(BaseModel):
 
 
 class Car(BaseModel):
+    CAR_TYPES = (
+        ('U', 'Used'),
+        ('N', 'New'),
+    )
     category = models.ForeignKey(CarCategory, on_delete=models.CASCADE, related_name='cars')
-    car_name = models.CharField(max_length=200)
+    car_name = models.CharField(max_length=100)
     desc = models.CharField(max_length=500, null=True, blank=True)
     price = models.IntegerField()
-    color = models.CharField(max_length=500, null=True, blank=True)
+    color = models.CharField(max_length=10, null=True, blank=True)
     images = models.ImageField(upload_to='car', blank=True)
     images2 = models.FileField(upload_to='car', null=True, blank=True)
     images3 = models.ImageField(upload_to='car', null=True, blank=True)
     images4 = models.ImageField(upload_to='car', null=True, blank=True)
     images5 = models.ImageField(upload_to='car', null=True, blank=True)
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True,  related_name = 'cars')
+    car_type = models.CharField(max_length=1, null=False, choices=CAR_TYPES, default='U')
 
     def __str__(self):
         return self.car_name

@@ -114,6 +114,11 @@ class CarCreateView(CreateView):
     template_name = "seller/car.html"
     fields = ['category', 'car_name', 'desc', 'price', 'color', 'images', 'images2', 'images3', 'images4', 'images5']
 
+    # print(self.request.user)
+    # is_admin = True
+    # if is_admin:
+    #     fields.append('car_type')
+
     def form_valid(self, form):
         form.instance.added_by = self.request.user
         print(self.request.user)
