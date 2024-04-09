@@ -9,12 +9,20 @@
 	<div class="form-container ride">
 		<div class="input-box">
 			<!-- The name attribute is set to "q" for the general query -->
-			<input type="search" name="q" placeholder="Search company or name" />
+			<input
+				type="search"
+				name="q"
+				placeholder="Search company or name"
+				value="{{search_query}}"
+			/>
 		</div>
 
 		<input type="submit" class="btn" value="Search" />
 	</div>
 </form>
+{% if search_query %}
+<div class="search-result">Search results for "{{search_query}}"</div>
+{% endif %}
 
 <div class="services-container" style="margin: 35px">
 	{% for cars in car %}

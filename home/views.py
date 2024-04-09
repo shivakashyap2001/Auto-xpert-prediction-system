@@ -160,6 +160,7 @@ def used_ride(request):
     context = {
         'title': 'Explore New Cars',
         'current_url': 'used-ride',
+        'search_query' : query,
         'car':car 
     }
     return render(request, 'home/ride.html', context)
@@ -193,6 +194,7 @@ def ride(request):
     context = {
         'title': 'Explore New Cars',
         'current_url': 'ride',
+        'search_query' : query,
         'car':car 
     }
     return render(request, 'home/ride.html', context)
