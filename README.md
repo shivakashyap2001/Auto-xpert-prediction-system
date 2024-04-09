@@ -76,6 +76,9 @@ The goal of the project to create a car and buying selling website with ml price
     python3 manage.py makemigrations
     python3 manage.py migrate
 
+
+    python3 manage.py shell
+
 ```
 
 

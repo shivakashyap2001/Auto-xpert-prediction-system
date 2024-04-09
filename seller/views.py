@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django import forms
+
 import pandas
 from .models import *
 from home.models import Car,Cart
@@ -108,20 +110,25 @@ def result(request):
 
 # def car(request):
 #     return render(request, 'seller/car.html')
+class CarForm(forms.ModelForm):
+    class Meta:
+        model = Car
+        fields = ['car_type', 'category', 'car_name', 'desc', 'price', 'color', 'images', 'images2', 'images3', 'images4', 'images5']
 
 class CarCreateView(CreateView):
     model = Car
     template_name = "seller/car.html"
-    fields = ['category', 'car_name', 'desc', 'price', 'color', 'images', 'images2', 'images3', 'images4', 'images5']
+    form_class = CarForm
 
-    # print(self.request.user)
-    # is_admin = True
-    # if is_admin:
-    #     fields.append('car_type')
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+
+        if not self.request.user.is_superuser:
+            form.fields.pop('car_type', None)
+        return form
 
     def form_valid(self, form):
         form.instance.added_by = self.request.user
-        print(self.request.user)
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):

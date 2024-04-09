@@ -6,8 +6,7 @@ from django.http import JsonResponse
 import json
 import datetime
 from django.core.paginator import Paginator
-
-
+from django.db.models import Q
 
 from django.contrib.auth.decorators import login_required
 
@@ -136,8 +135,18 @@ def detail_page(request, detail_page_uid):
 
 def used_ride(request):
     car = Car.objects.filter(car_type='U')
+    query = request.GET.get('q', '')  # Get the query parameter 'q', or '' if not present
+    if query:
+        is_digit = query.isdigit()
+        car = car.filter(
+            Q(car_name__icontains=query) |
+            Q(desc__icontains=query) |
+            Q(category__category_name__icontains=query) |
+            (Q(price=query) if is_digit else Q())
+        )
+
+
     paginator = Paginator(car, 9)
-    
     page_number = request.GET.get('page')
     try:
         car = paginator.get_page(page_number)
@@ -149,7 +158,7 @@ def used_ride(request):
         car = paginator.page(paginator.num_pages)
         
     context = {
-        'title': 'Explore Used Cars',
+        'title': 'Explore New Cars',
         'car':car 
     }
     return render(request, 'home/ride.html', context)
@@ -157,6 +166,16 @@ def used_ride(request):
 
 def ride(request):
     car = Car.objects.filter(car_type='N')
+    query = request.GET.get('q', '')  # Get the query parameter 'q', or '' if not present
+    if query:
+        is_digit = query.isdigit()
+        car = car.filter(
+            Q(car_name__icontains=query) |
+            Q(desc__icontains=query) |
+            Q(category__category_name__icontains=query) |
+            (Q(price=query) if is_digit else Q())
+        )
+
     paginator = Paginator(car, 9)
     
     page_number = request.GET.get('page')

@@ -17,3 +17,4 @@ sqlparse==0.4.2
 threadpoolctl==3.1.0
 tzdata==2022.1
 Pillow
+djangorestframework
