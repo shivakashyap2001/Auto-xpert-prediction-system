@@ -142,9 +142,9 @@ def used_ride(request):
             Q(car_name__icontains=query) |
             Q(desc__icontains=query) |
             Q(category__category_name__icontains=query) |
+            Q(color__icontains=query) |
             (Q(price=query) if is_digit else Q())
         )
-
 
     paginator = Paginator(car, 9)
     page_number = request.GET.get('page')
@@ -159,6 +159,7 @@ def used_ride(request):
         
     context = {
         'title': 'Explore New Cars',
+        'current_url': 'used-ride',
         'car':car 
     }
     return render(request, 'home/ride.html', context)
@@ -173,6 +174,7 @@ def ride(request):
             Q(car_name__icontains=query) |
             Q(desc__icontains=query) |
             Q(category__category_name__icontains=query) |
+            Q(color__icontains=query) |
             (Q(price=query) if is_digit else Q())
         )
 
@@ -190,6 +192,7 @@ def ride(request):
         
     context = {
         'title': 'Explore New Cars',
+        'current_url': 'ride',
         'car':car 
     }
     return render(request, 'home/ride.html', context)

@@ -5,6 +5,17 @@
 <h1 class="projTitle" style="text-align: center; margin-top: 1.5em">
 	{{title}}
 </h1>
+<form action="{% url current_url %}" method="get">
+	<div class="form-container ride">
+		<div class="input-box">
+			<!-- The name attribute is set to "q" for the general query -->
+			<input type="search" name="q" placeholder="Search company or name" />
+		</div>
+
+		<input type="submit" class="btn" value="Search" />
+	</div>
+</form>
+
 <div class="services-container" style="margin: 35px">
 	{% for cars in car %}
 	<div class="box">

@@ -599,19 +599,18 @@ header{
             </div>
         </div>
 
-        <form action="">
+        <form action="{% url 'ride' %}" method="get">
             <div class="form-container">
                 <div class="input-box">
-                    <span>Search Car</span>
-                    <input type="search" name="" id="" placeholder="Search comapny">
+                    <span>Search New Cars</span>
+                    <!-- The name attribute is set to "q" for the general query -->
+                    <input type="search" name="q" placeholder="Search company or name">
                 </div>
-                <div class="input-box">
-                    <span>Car Type</span>
-                    <input type="search" name="" id="" placeholder="Search Name">
-                </div>
-                <input type="submit" name="" id="" class="btn">
+                
+                <input type="submit" class="btn" value="Search">
             </div>
         </form>
+        
     </section>
 
 
