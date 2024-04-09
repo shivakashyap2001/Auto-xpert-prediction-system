@@ -158,7 +158,7 @@ def used_ride(request):
         car = paginator.page(paginator.num_pages)
         
     context = {
-        'title': 'Explore New Cars',
+        'title': 'Explore Used Cars',
         'current_url': 'used-ride',
         'search_query' : query,
         'car':car 
