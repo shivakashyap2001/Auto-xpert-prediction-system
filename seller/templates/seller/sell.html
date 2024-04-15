@@ -50,7 +50,7 @@
 
 	#form-wrapper {
 		max-width: 600px;
-		margin: 0 auto;
+		margin: 15em auto 5em;
 		padding-bottom: 100px;
 	}
 
@@ -101,14 +101,14 @@
 
 	@keyframes title {
 		0% {
-			left: 225px;
+			left: 175px;
 		}
 		50% {
 			left: 0px;
 			animation-timing-function: ease-in;
 		}
 		100% {
-			left: 225px;
+			left: 175px;
 		}
 	}
 
@@ -196,7 +196,7 @@
 	}
 </style>
 
-<div id="background" style="width: 100%; padding: 20px"></div>
+<div id="background" style="width: 100%; padding: 20px; margin-top: 5em"></div>
 <div id="form-wrapper">
 	<div id="person">
 		<svg
@@ -271,7 +271,7 @@
 		{% csrf_token %}
 		<span class="title">Used Car Price Predictor</span>
 
-		<label for="company">Car Brand</label>
+		<label for="company">Car Company</label>
 		<select
 			class="selectpicker form-control"
 			id="company"
@@ -284,7 +284,7 @@
 			{% endfor %}
 		</select>
 
-		<label for="company">Car Brand</label>
+		<label for="car_models">Car Model</label>
 		<select
 			class="selectpicker form-control"
 			id="car_models"
@@ -323,6 +323,21 @@
 		/>
 
 		<input type="submit" value="Predict Price" />
+		<span>
+			{% if request.user.is_authenticated %}
+			<a href="{% url 'car' %}" class="logo">
+				<div class="btn btn-primary btn-lg btn-block">
+					OR Sell without Prediction
+				</div>
+			</a>
+			{% else %}
+			<a href="{% url 'login' %}" class="logo">
+				<div class="btn btn-primary btn-lg btn-block">
+					OR Sell without Prediction
+				</div>
+			</a>
+			{% endif %}
+		</span>
 	</form>
 </div>
 
